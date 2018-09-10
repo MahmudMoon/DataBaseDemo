@@ -51,4 +51,23 @@ public class SqlHelper extends SQLiteOpenHelper {
         Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
         return cursor;
     }
+
+    public int delete(String phone){
+        //String sql = "delete from " + TABLE_NAME + " where " + Col_two + " = " + phone;
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        int delete = sqLiteDatabase.delete(TABLE_NAME, " phone = ? ", new String[]{phone});
+        return delete;
+
+        // sqLiteDatabase.execSQL(sql);
+    }
+
+    public int update(String name,String phone,int age){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Col_one,name);
+        contentValues.put(Col_three,age);
+        int update = sqLiteDatabase.update(TABLE_NAME, contentValues, " phone = ? ", new String[]{phone});
+        return update;
+    }
+
 }
